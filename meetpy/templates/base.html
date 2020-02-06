@@ -9,7 +9,7 @@
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ group.name }} | {% block og_title %}{% endblock %}"/>
-    <meta property="og:description" content="{{ group.name }} to cykliczne spotkania pasjonatów języka programowania Python z {{ group.city_genitive }} i okolic.">
+    <meta property="og:description" content="PyData KRK is Cracow's chapter of PyData ">
     <meta property="og:url" content="http://{{ site.domain }}{{ request.get_full_path }}">
     <meta property="og:image" content="http://{{ site.domain }}{% static 'img/logo.png' %}"/>
     <meta property="og:site_name" content="{{ group.name }}"/>
@@ -42,12 +42,23 @@
     </script>
 </head>
 <body>
+    <style type="text/css">
+    #slackbar {
+        background: #a10;
+        color: white;
+        text-align: center;
+        line-height: 3em;
+    }
+    #slackbar a { color: white; text-decoration: underline; }
+    </style>
+    
+    <div id="slackbar">Join us on <a href='#'>slack</a></div>
 	<div id="wrapper">
 		<header>
 			<div class="container">
 				<div class="row">
 					<div id="header-logo" class="span2">
-						<a href="{% url 'misc:home' %}"><img src="{% static 'img/logo.png' %}" alt="{{ group.name }}" class="logo"></a>
+						<a href="{% url 'misc:home' %}"><img src="{% static 'img/logo.png' %}" alt="PyData Kraków" title="PyData Kraków" class="logo"></a>
 					</div>
 					<div id="top">
 						<div class="span7">
@@ -58,9 +69,9 @@
                 {% url 'misc:home' as home_url %}
                 {% url 'misc:faq' as faq_url %}
                 <li><a href="{{ home_url }}"{% if request.path == home_url %} class="active"{% endif %}>Home</a></li>
-								<li><a href="{{ meetup_list_url }}"{% if request.path == meetup_list_url %} class="active"{% endif %}>Spotkania</a></li>
-                <li><a href="{{ speaker_list_url }}"{% if request.path == speaker_list_url %} class="active"{% endif %}>Prelegenci</a></li>
-                <li><a href="{{ sponsor_list_url }}"{% if request.path == sponsor_list_url %} class="active"{% endif %}>Sponsorzy</a></li>
+								<li><a href="{{ meetup_list_url }}"{% if request.path == meetup_list_url %} class="active"{% endif %}>Meetups</a></li>
+                <li><a href="{{ speaker_list_url }}"{% if request.path == speaker_list_url %} class="active"{% endif %}>Speakers</a></li>
+                <li><a href="{{ sponsor_list_url }}"{% if request.path == sponsor_list_url %} class="active"{% endif %}>Sponsors</a></li>
                 <li><a href="{{ faq_url }}"{% if request.path == faq_url %} class="active"{% endif %}>FAQ</a></li>
 							</ul>
 						</div>
@@ -105,17 +116,17 @@
                 <div class="span12">
                     <div class="row margin-bottom-large">
                         <div class="span2">
-                            <h5>Mapa witryny</h5>
+                            <h5>Sitemap</h5>
                             <ul>
                                 <li><a href="{% url 'misc:home' %}">Home</a></li>
-                                <li><a href="{% url 'meetups:meetup_list' %}">Spotkania</a></li>
-                                <li><a href="{% url 'meetups:speaker_list' %}">Prelegenci</a></li>
-                                <li><a href="{% url 'meetups:sponsor_list' %}">Sponsorzy</a></li>
+                                <li><a href="{% url 'meetups:meetup_list' %}">Meetups</a></li>
+                                <li><a href="{% url 'meetups:speaker_list' %}">Speakers</a></li>
+                                <li><a href="{% url 'meetups:sponsor_list' %}">Sponsors</a></li>
                                 <li><a href="{% url 'misc:faq' %}">FAQ</a></li>
                             </ul>
                         </div>
                         <div class="span2">
-                            <h5>Jesteśmy na</h5>
+                            <h5>Other palces on the internet</h5>
                             <ul class="social-media-footer">
                                 {% if group.social.meetup %}
                                     <li><a href="{{ group.social.meetup }}" class="meetup" target="_blank"></a></li>
@@ -138,7 +149,7 @@
                         {% endif %}
                         </div>
                         <div class="span2">
-                            <h5>Python w Polsce</h5>
+                            <h5>Python in Poland</h5>
                             <ul>
                                 <li><a href="http://pl.python.org/" target="_blank">PPCG</a></li>
                                 <li><a href="http://pl.pycon.org/" target="_blank">PyCon PL</a></li>
@@ -180,9 +191,9 @@
                             <div class="pull-left statistics">
                                 <h5 class="pull-left">Statystyki</h5>
                                 <p class="pull-left">
-                                Spotkania: <span>{{ meetups_stats.meetups_count }}</span>
-                                &bull; Prelegenci: <span>{{ meetups_stats.speakers_count }}</span>
-                                &bull; Prezentacje: <span>{{ meetups_stats.talks_count }}</span>
+                                Meetups: <span>{{ meetups_stats.meetups_count }}</span>
+                                &bull; Speakers: <span>{{ meetups_stats.speakers_count }}</span>
+                                &bull; Talks: <span>{{ meetups_stats.talks_count }}</span>
                                 </p>
                             </div>
                             <div class="pull-left stack margin-left-big">
